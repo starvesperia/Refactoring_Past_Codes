@@ -1,28 +1,27 @@
-/*
+ï»¿/*
 problem
-Á÷¼± ±×·¡ÇÁ Ãâ·ÂÇÏ±â
+ì§ì„  ê·¸ë˜í”„ ì¶œë ¥í•˜ê¸°
 */
 
 /*
-ÄÄÇ»ÅÍ °øÇĞºÎ 2ÇĞ³â
+ì»´í“¨í„° ê³µí•™ë¶€ 2í•™ë…„
 20103343 
-¹ÚÇü¼ø
+ë°•í˜•ìˆœ
 */
 
 #include <iostream>
 #include <fstream>
-using namespace std;
-void printStGraph(int s);
+#include "Graph.h"
 
 void main ()
 {
-	ifstream inStream;
+	std::ifstream inStream;
 	int numTestCases;
 
 	inStream. open("input.txt"); /* open input file*/
 	if(inStream.fail())
 	{
-		cerr << "Input file opening failed.\n";
+		std::cerr << "Input file opening failed.\n";
 		exit(1);
 	}
 
@@ -31,50 +30,10 @@ void main ()
 	{
 		int sizeOfGraph;
 		inStream >> sizeOfGraph;
-		printStGraph(sizeOfGraph);
+		
+		Graph graph(sizeOfGraph);
+		graph.StraightLine();
+		graph.Print();
 	}
 	inStream.close();	/* close input file */
-}
-
-void printStGraph(int s)
-{
-	// the 1st, 2nd quadrant 
-	int row=1;
-	for(int rowCount=0; rowCount<s/2; rowCount++)
-	{
-		for(int dot=0; dot<s/2; dot++)
-			cout<<".";
-		cout<<"I";	//Y-axis
-		for(int dot=0; dot<(s/2)-row; dot++)
-			cout<<".";
-		cout<<"*";
-		for(int dot=0; dot<rowCount; dot++)
-			cout<<".";
-		row++;
-		cout<<endl;
-	}
-
-	// X-axis 
-	for(int col=0; col<s/2; col++)
-		cout<<"+";
-	cout<<"O";
-	for(int col=0; col<s/2; col++)
-		cout<<"+";
-	cout<<endl;
-	
-	// the 3rd, 4th quadrant
-	row=1;
-	for(int rowCount=0; rowCount<s/2; rowCount++)
-	{
-		for(int dot=0; dot<(s/2)-row; dot++)
-			cout<<".";
-		cout<<"*";
-		for(int dot=0; dot<rowCount; dot++)
-			cout<<".";
-		cout<<"I";	// Y-axis
-		for(int dot=0; dot<s/2; dot++)
-			cout<<".";
-		row++;
-		cout<<endl;
-	}
 }
